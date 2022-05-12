@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+header {
+  border: black solid 1px;
+  margin-bottom: 50px;
+  .container {
+    border: black solid 1px;
+    width: 80vw;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100px;
+    .top-banner {
+      background-color: lightblue;
+      display: flex;
+      justify-content: center;
+      height: 60%;
+      .marvel-logo {
+        height: 100%;
+      }
+    }
+    .nav-banner {
+      height: 40%;
+
+      ul {
+        display: flex;
+        justify-content: space-around;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-inline-start: 0;
+        list-style: none;
+      }
+    }
+  }
+}
