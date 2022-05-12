@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CardCharacter from "../components/CardCharacter";
-import Pagination from "../components/Pagination";
+import CardCharacter from "../../components/CardCharacter";
+import Pagination from "../../components/Pagination/Pagination";
 
 // import "../components/CharactersAndComics.scss";
 
@@ -10,14 +10,13 @@ const Characters = () => {
   const [data, setData] = useState();
 
   const [search, setSearch] = useState("");
-
-  // const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/characters?search=${search}`
+          `http://localhost:3000/characters?page=${page}&search=${search}`
         );
         // `https://marvel-backend-lucie.herokuapp.com/characters`
         console.log(response.data);
@@ -28,13 +27,13 @@ const Characters = () => {
       }
     };
     fetchData();
-  }, [search]);
+  }, [page, search]);
 
-  // const numberOfPages = Math.ceil(data.count / 100);
-  // const tabNumberOfPages = [];
-  // for (let i = 0; i < numberOfPages; i++) {
-  //   tabNumberOfPages.push(0);
-  // }
+  const numberOfPages = Math.ceil(data.count / 100);
+  const tab = [];
+  for (let i = 0; i < numberOfPages; i++) {
+    tab.push(0);
+  }
 
   return (
     <>
@@ -50,6 +49,7 @@ const Characters = () => {
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
+                setPage(1);
               }}
             />
           </div>
@@ -69,6 +69,12 @@ const Characters = () => {
                 })}
             </div>
           </div>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            tab={tab}
+            numberOfPages={numberOfPages}
+          />
         </div>
       )}
     </>

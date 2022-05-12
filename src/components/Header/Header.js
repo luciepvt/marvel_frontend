@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/img/Marvel_Logo.svg.png";
+import logo from "/Users/user/leReacteur/react/MARVEL/marvel_frontend/src/assets/img/Marvel_Logo.svg.png";
 
-import "../components/Header.scss";
+import "../Header/Header.scss";
 const Header = () => {
   return (
     <header>

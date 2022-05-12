@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CardComic from "../components/CardComic";
+import CardComic from "../../components/CardComic";
 
 const Comics = () => {
   const [isLoading, setIsLoading] = useState(true);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import CardComic from "../components/CardComic";
+import CardComic from "../../components/CardComic";
 
 const Character = () => {
   const [isLoading, setIsLoading] = useState(true);
