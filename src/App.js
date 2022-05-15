@@ -13,13 +13,13 @@ import Character from "./pages/Character/Character";
 import Favorites from "./pages/Favorites/Favorites";
 import SignupLogin from "./pages/SignupLogin/SignupLogin";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faEnvelope,
-  faKey,
-  faListAlt,
-} from "@fortawesome/free-solid-svg-icons";
-library.add(faEnvelope, faKey, faListAlt);
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import {
+//   faEnvelope,
+//   faKey,
+//   faListAlt,
+// } from "@fortawesome/free-solid-svg-icons";
+// library.add(faEnvelope, faKey, faListAlt);
 
 const App = () => {
   const [token, setToken] = useState(null);
