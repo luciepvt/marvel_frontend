@@ -1,18 +1,25 @@
-const Pagination = ({ page, setPage, tab, numberOfPages }) => {
+import "../Pagination/Pagination.scss";
+const Pagination = ({ page, setPage, limit }) => {
   return (
     <div>
-      {tab.map((item, index) => {
-        return (
-          <button
-            key={index}
-            onClick={() => {
-              setPage(index + 1);
-            }}
-          >
-            {index + 1}
-          </button>
-        );
-      })}
+      <button
+        className={page === 1 ? "hidden" : "page-btn"}
+        onClick={() => {
+          setPage(page - 1);
+        }}
+      >
+        previous
+      </button>
+      <p>{`page ${page} / ${limit}`}</p>
+      <button
+        className={page === limit ? "hidden" : "page-btn"}
+        onClick={() => {
+          setPage(page + 1);
+        }}
+      >
+        next
+      </button>
+      );
     </div>
   );
 };

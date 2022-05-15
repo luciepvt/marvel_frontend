@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import CardComic from "../../components/CardComic";
+import CardComic from "../../components/Cards/CardComic";
+import CardCharacter from "../../components/Cards/CardCharacter";
 
-const Character = () => {
+const Character = ({ favChar, setFavChar, favCom, setFavCom, token }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   const { id } = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/comics/${id}`);
-        // const response = await axios.get(
-        //   `https://marvel-backend-lucie.herokuapp.com/comics/${id}`
-        // );
+        // `https://marvel-backend-lucie.herokuapp.com/comics/${id}`
+
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -27,27 +27,26 @@ const Character = () => {
   ) : (
     <div>
       <div className="character-infos">
-        <div>{data.name}</div>
-        <div>
-          <img
-            src={`${data.thumbnail.path}.${data.thumbnail.extension} `}
-            alt=""
-          />
-        </div>
-        <div>{data.description}</div>
+        <CardCharacter
+          id="character-details"
+          character={data}
+          favChar={favChar}
+          setFavChar={setFavChar}
+          token={token}
+        />
       </div>
       {data.comics.length > 0 && (
         <div>
-          <p>{data.name} is featured in the following comics</p>
+          <p> is featured in the following comics</p>
           <div className="comics-cards">
-            {data.comics.map((item, index) => {
+            {data.comics.map((comic) => {
               return (
                 <CardComic
-                  key={item._id}
-                  title={item.title}
-                  picture={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                  description={item.description}
-                  id={item._id}
+                  key={comic._id}
+                  comic={comic}
+                  favCom={favCom}
+                  setFavCom={setFavCom}
+                  token={token}
                 />
               );
             })}

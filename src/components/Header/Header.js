@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "/Users/user/leReacteur/react/MARVEL/marvel_frontend/src/assets/img/Marvel_Logo.svg.png";
 
 import "../Header/Header.scss";
-const Header = () => {
+const Header = ({ token, setUser }) => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="container">
@@ -23,6 +24,22 @@ const Header = () => {
             <li>
               <Link to="/favorites">Favorites</Link>
             </li>
+            {token ? (
+              <li>
+                <button
+                  onClick={() => {
+                    setUser(null, [], []);
+                    navigate("/");
+                  }}
+                >
+                  Disconnect
+                </button>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login"> Connect | Suscribe</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
