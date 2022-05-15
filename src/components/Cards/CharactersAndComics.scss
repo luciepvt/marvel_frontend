@@ -45,6 +45,7 @@
         border-radius: 50%;
         background-color: var(--red);
         border: solid 1px white;
+        cursor: pointer;
       }
       .no-fav-btn {
         margin: 5px 5px;
@@ -53,6 +54,7 @@
         border-radius: 50%;
         border: var(--red);
         background-color: white;
+        cursor: pointer;
       }
 
       .character-name,

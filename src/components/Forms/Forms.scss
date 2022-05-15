@@ -3,6 +3,7 @@
   width: 80vw;
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 100px;
   .signup-form-container,
   .login-form-container {
     display: flex;
@@ -18,7 +19,6 @@
     }
     input {
       border: none;
-      border-bottom: 1px solid var(--border);
       outline: none;
       margin-bottom: 20px;
       width: 100%;
