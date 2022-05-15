@@ -4,25 +4,35 @@ import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import CardCharacter from "../../components/Cards/CardCharacter";
 import CardComic from "../../components/Cards/CardComic";
-const Favorites = ({ favChar, setFavChar, favCom, setFavCom }) => {
+
+import "../../components/Cards/CharactersAndComics.scss";
+import "../Favorites/Favorites.scss";
+
+const Favorites = ({
+  favoriteChar,
+  setFavoriteChar,
+  favoriteCom,
+  setFavoriteCom,
+}) => {
   const token = Cookies.get("token");
 
   return token ? (
-    <div id="favorites">
+    <div className="favorites">
       <div className="favorite-container">
         <div className="favorite-char">
           <p>Favorite Characters</p>
           <div className="favorite-char-cards">
-            {favChar.length === 0 ? (
+            {favoriteChar.length === 0 ? (
               <div>You have no favorite characters yet</div>
             ) : (
-              favChar.map((character) => {
+              favoriteChar.map((character) => {
                 return (
                   <CardCharacter
+                    id="card-character"
                     key={character._id}
                     character={character}
-                    favChar={favChar}
-                    setFavChar={setFavChar}
+                    favoriteChar={favoriteChar}
+                    setFavoriteChar={setFavoriteChar}
                     token={token}
                   />
                 );
@@ -32,16 +42,17 @@ const Favorites = ({ favChar, setFavChar, favCom, setFavCom }) => {
           <div className="favorite-com">
             <p>Favorite Comics</p>
             <div className="favorite-com-cards">
-              {favCom.length === 0 ? (
+              {favoriteCom.length === 0 ? (
                 <div>You have no favorite comics yet</div>
               ) : (
-                favCom.map((comic) => {
+                favoriteCom.map((comic) => {
                   return (
                     <CardComic
+                      id="card-comic"
                       key={comic._id}
                       comic={comic}
-                      favCom={favCom}
-                      setFavCom={setFavCom}
+                      favoriteCom={favoriteCom}
+                      setFavoriteCom={setFavoriteCom}
                       token={token}
                     />
                   );

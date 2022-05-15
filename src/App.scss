@@ -1,3 +1,7 @@
+:root {
+  --red: #ed181e;
+  --grey: #dadada;
+}
 a,
 a:hover {
   text-decoration: none;
@@ -9,4 +13,9 @@ a:hover {
   box-sizing: border-box;
   // add font-family
   -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: black;
+  color: white;
 }

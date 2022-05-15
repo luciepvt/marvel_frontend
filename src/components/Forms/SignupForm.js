@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import "../Forms/Forms.scss";
 
 const SignupForm = ({
   email,
@@ -23,8 +24,8 @@ const SignupForm = ({
           password,
         };
         const response = await axios.post(
-          "http://localhost:3000/user/signup",
-          // https://marvel-backend-lucie.herokuapp.com/user/signup
+          "https://marvel-backend-lucie.herokuapp.com/user/signup",
+
           user
         );
         setUser(
@@ -46,7 +47,7 @@ const SignupForm = ({
     <>
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="signup-form-container">
-          <h1>Suscribe</h1>
+          <h1>Subscribe</h1>
           <span className="error-message">{errorMessage}</span>
           <input
             type="text"
@@ -65,16 +66,16 @@ const SignupForm = ({
             }}
           />
           <input className="submit-btn" type="submit" value="Register" />
+          <button
+            className="member-btn"
+            onClick={() => {
+              setLogin((prevState) => !prevState);
+            }}
+          >
+            Already a member ? Log in!
+          </button>
         </div>
       </form>
-      <button
-        className="member-btn"
-        onClick={() => {
-          setLogin((prevState) => !prevState);
-        }}
-      >
-        Already a member ? Log in!
-      </button>
     </>
   );
 };

@@ -1,3 +1,21 @@
 .hidden {
   display: none;
 }
+
+.page-container {
+  border: black solid 1px;
+  width: 80vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  .page-btn {
+    width: 100px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--red);
+    border: solid 1px white;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+}

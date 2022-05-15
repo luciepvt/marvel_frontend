@@ -1,0 +1,45 @@
+.signup-form,
+.login-form {
+  width: 80vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  .signup-form-container,
+  .login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    margin: 20px auto;
+    border: 1px solid white;
+    padding: 30px 30px;
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      border: none;
+      border-bottom: 1px solid var(--border);
+      outline: none;
+      margin-bottom: 20px;
+      width: 100%;
+      border-width: 1px;
+      font-size: 1rem;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 8px 0;
+      border-radius: 4px;
+      border: 1px solid var(--red);
+      background-color: var(--red);
+      color: white;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .member-btn {
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

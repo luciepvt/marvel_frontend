@@ -3,32 +3,29 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-// import "../components/CharactersAndComics.scss";
-
-const CardCharacter = ({ character, favChar, setFavChar, token }) => {
+import "../Cards/CharactersAndComics.scss";
+import "../../pages/Favorites/Favorites.scss";
+const CardCharacter = ({ character, favoriteChar, setFavoriteChar, token }) => {
   const [favorite, setFavorite] = useState(false);
   const navigate = useNavigate();
 
-  // garder le favoris en mémoire
   useEffect(() => {
-    if (favChar.findIndex((fav) => fav._id === character._id) !== -1) {
+    if (favoriteChar.findIndex((fav) => fav._id === character._id) !== -1) {
       setFavorite(true);
     } else {
       setFavorite(false);
     }
-  }, [character._id, favChar]);
-
-  // ajouter ou enlever favoris from BDD
+  }, [character._id, favoriteChar]);
 
   const handleFavorite = async () => {
     if (token) {
       try {
         if (!favorite) {
-          const newFav = [...favChar];
+          const newFav = [...favoriteChar];
           newFav.push(character);
           const response = await axios.post(
-            "http://localhost:3000/favorites/update",
-            // https://marvel-backend-lucie.herokuapp.com/favorites/update
+            "https://marvel-backend-lucie.herokuapp.com/favorites/update",
+
             {
               favoriteCharacters: newFav,
             },
@@ -38,16 +35,18 @@ const CardCharacter = ({ character, favChar, setFavChar, token }) => {
               },
             }
           );
-          setFavChar(response.data.favoriteCharacters);
+          setFavoriteChar(response.data.favoriteCharacters);
           Cookies.set(
-            "favChar",
+            "favoriteChar",
             JSON.stringify(response.data.favoriteCharacters)
           );
         } else {
-          const trashFav = favChar.filter((fav) => fav._id !== character._id);
+          const trashFav = favoriteChar.filter(
+            (fav) => fav._id !== character._id
+          );
           const response = await axios.post(
-            "http://localhost:3000/favorites/update",
-            // https://marvel-backend-lucie.herokuapp.com/favorites/update
+            "https://marvel-backend-lucie.herokuapp.com/favorites/update",
+
             {
               favoriteCharacters: trashFav,
             },
@@ -57,9 +56,9 @@ const CardCharacter = ({ character, favChar, setFavChar, token }) => {
               },
             }
           );
-          setFavChar(response.data.favoriteCharacters);
+          setFavoriteChar(response.data.favoriteCharacters);
           Cookies.set(
-            "favChar",
+            "favoriteChar",
             JSON.stringify(response.data.favoriteCharacters)
           );
         }
@@ -75,13 +74,9 @@ const CardCharacter = ({ character, favChar, setFavChar, token }) => {
   return (
     <div className="card-character">
       {favorite ? (
-        <button className="red-btn" onClick={handleFavorite}>
-          fav
-        </button>
+        <button className="fav-btn" onClick={handleFavorite}></button>
       ) : (
-        <button className="grey-btn" type onClick={handleFavorite}>
-          not fav
-        </button>
+        <button className="no-fav-btn" type onClick={handleFavorite}></button>
       )}
       <Link className="link-character" to={`/characters/${character._id}`}>
         <div className="character-name">{character.name}</div>
@@ -93,7 +88,7 @@ const CardCharacter = ({ character, favChar, setFavChar, token }) => {
           />
         </div>
         <div className="character-description-container">
-          <div className="character-description">{character.description}</div>
+          <p className="character-description">{character.description}</p>
         </div>
       </Link>
     </div>

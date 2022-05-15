@@ -1,0 +1,28 @@
+.favorites {
+  .favorite-container {
+    width: 80vw;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    .favorite-char,
+    .favorite-com {
+      border: solid white 1px;
+      height: 500px;
+      p {
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .favorite-char-cards,
+      .favorite-com-cards {
+        height: 80%;
+        display: flex;
+        overflow: hidden;
+        overflow-x: scroll;
+        #card-charcater,
+        #card-comic {
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}

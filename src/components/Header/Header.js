@@ -16,24 +16,22 @@ const Header = ({ token, setUser }) => {
         <nav className="nav-banner">
           <ul>
             <li>
-              <Link to="/"> Characters</Link>
+              <Link to="/"> CHARACTERS</Link>
             </li>
             <li>
-              <Link to="/comics">Comics</Link>
+              <Link to="/comics">COMICS</Link>
             </li>
             <li>
-              <Link to="/favorites">Favorites</Link>
+              <Link to="/favorites">FAVORITES</Link>
             </li>
             {token ? (
-              <li>
-                <button
-                  onClick={() => {
-                    setUser(null, [], []);
-                    navigate("/");
-                  }}
-                >
-                  Disconnect
-                </button>
+              <li
+                onClick={() => {
+                  setUser(null, [], []);
+                  navigate("/");
+                }}
+              >
+                Disconnect
               </li>
             ) : (
               <li>

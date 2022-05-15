@@ -11,7 +11,6 @@ header {
     margin: 0 auto;
     height: 100px;
     .top-banner {
-      background-color: lightblue;
       display: flex;
       justify-content: center;
       height: 60%;
@@ -20,6 +19,7 @@ header {
       }
     }
     .nav-banner {
+      margin-top: 20px;
       height: 40%;
 
       ul {
@@ -29,6 +29,7 @@ header {
         margin-block-end: 0;
         padding-inline-start: 0;
         list-style: none;
+        font-weight: bold;
       }
     }
   }

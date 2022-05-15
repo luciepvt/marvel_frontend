@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-
+import "../Forms/Forms.scss";
 const LoginForm = ({
   email,
   setEmail,
@@ -23,8 +23,8 @@ const LoginForm = ({
           password,
         };
         const response = await axios.post(
-          "http://localhost:3000/user/login",
-          // https://marvel-backend-lucie.herokuapp.com/user/login
+          "https://marvel-backend-lucie.herokuapp.com/user/login",
+
           user
         );
         setUser(
@@ -65,16 +65,16 @@ const LoginForm = ({
             }}
           />
           <input className="submit-btn" type="submit" value="Log in" />
+          <button
+            className="member-btn"
+            onClick={() => {
+              setLogin((prevState) => !prevState);
+            }}
+          >
+            You don't have an account yet? Register now!
+          </button>
         </div>
       </form>
-      <button
-        className="member-btn"
-        onClick={() => {
-          setLogin((prevState) => !prevState);
-        }}
-      >
-        You don't have an account yet? Register now!
-      </button>
     </>
   );
 };

@@ -2,30 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-const CardComic = ({ comic, favCom, setFavCom, token }) => {
+
+import "../Cards/CharactersAndComics.scss";
+import "../../pages/Favorites/Favorites.scss";
+const CardComic = ({ comic, favoriteCom, setFavoriteCom, token }) => {
   const [favorite, setFavorite] = useState(false);
   const navigate = useNavigate();
 
-  //garder le favoris en mémoire
   useEffect(() => {
-    if (favCom.findIndex((fav) => fav._id === comic._id) !== -1) {
+    if (favoriteCom.findIndex((fav) => fav._id === comic._id) !== -1) {
       setFavorite(true);
     } else {
       setFavorite(false);
     }
-  }, [comic._id, favCom]);
-
-  //ajouter ou enlever favoris from dbb
+  }, [comic._id, favoriteCom]);
 
   const handleFavorite = async () => {
     if (token) {
       try {
         if (!favorite) {
-          const newFav = [...favCom];
+          const newFav = [...favoriteCom];
           newFav.push(comic);
           const response = await axios.post(
-            "http://localhost:3000/favorites/update",
-            // https://marvel-backend-lucie.herokuapp.com/favorites/update
+            "https://marvel-backend-lucie.herokuapp.com/favorites/update",
+
             { favoriteComics: newFav },
             {
               headers: {
@@ -33,13 +33,16 @@ const CardComic = ({ comic, favCom, setFavCom, token }) => {
               },
             }
           );
-          setFavCom(response.data.favoriteComics);
-          Cookies.set("favCom", JSON.stringify(response.data.favoriteComics));
+          setFavoriteCom(response.data.favoriteComics);
+          Cookies.set(
+            "favoriteCom",
+            JSON.stringify(response.data.favoriteComics)
+          );
         } else {
-          const trashFav = favCom.filter((fav) => fav._id !== comic._id);
+          const trashFav = favoriteCom.filter((fav) => fav._id !== comic._id);
           const response = await axios.post(
-            "http://localhost:3000/favorites/update",
-            // https://marvel-backend-lucie.herokuapp.com/favorites/update
+            "https://marvel-backend-lucie.herokuapp.com/favorites/update",
+
             { favoriteComics: trashFav },
             {
               headers: {
@@ -47,8 +50,11 @@ const CardComic = ({ comic, favCom, setFavCom, token }) => {
               },
             }
           );
-          setFavCom(response.data.favoriteComics);
-          Cookies.set("favCom", JSON.stringify(response.data.favoriteComics));
+          setFavoriteCom(response.data.favoriteComics);
+          Cookies.set(
+            "favoriteCom",
+            JSON.stringify(response.data.favoriteComics)
+          );
         }
         setFavorite(!favorite);
       } catch (error) {
@@ -61,13 +67,9 @@ const CardComic = ({ comic, favCom, setFavCom, token }) => {
   return (
     <div className="card-comic">
       {favorite ? (
-        <button className="red-btn" onClick={handleFavorite}>
-          fav
-        </button>
+        <button className="fav-btn" onClick={handleFavorite}></button>
       ) : (
-        <button className="grey-btn" type onClick={handleFavorite}>
-          not fav
-        </button>
+        <button className="no-fav-btn" type onClick={handleFavorite}></button>
       )}
       <div className="comic-title">{comic.title}</div>
       <div className="comic-picture-container">

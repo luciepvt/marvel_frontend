@@ -2,13 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-//
 import CardCharacter from "../../components/Cards/CardCharacter";
 import Pagination from "../../components/Pagination/Pagination";
+import "../../components/Cards/CharactersAndComics.scss";
+import "../Favorites/Favorites.scss";
 
-// import "../components/CharactersAndComics.scss";
-
-const Characters = ({ token, favChar, setFavChar }) => {
+const Characters = ({ token, favoriteChar, setFavoriteChar }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -19,9 +18,8 @@ const Characters = ({ token, favChar, setFavChar }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/characters?page=${page}&search=${search}`
+          `https://marvel-backend-lucie.herokuapp.com/characters?page=${page}&search=${search}`
         );
-        // `https://marvel-backend-lucie.herokuapp.com/characters?page=${page}&search=${search}`
 
         setData(response.data);
         setLimit(Math.ceil(response.data.count / response.data.limit));
@@ -51,7 +49,7 @@ const Characters = ({ token, favChar, setFavChar }) => {
               }}
             />
           </div>
-          <Pagination page={page} setPage={setPage} limit={limit} />
+
           <div className="characters">
             <div className="characters-container">
               {data.results &&
@@ -64,8 +62,8 @@ const Characters = ({ token, favChar, setFavChar }) => {
                         `http://i.annihil.us/u/prod/marvel/i/mg/f/60/4c002e0305708` ? (
                         <CardCharacter
                           character={character}
-                          favChar={favChar}
-                          setFavChar={setFavChar}
+                          favoriteChar={favoriteChar}
+                          setFavoriteChar={setFavoriteChar}
                           token={token}
                         />
                       ) : null}

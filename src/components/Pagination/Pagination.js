@@ -1,7 +1,7 @@
 import "../Pagination/Pagination.scss";
 const Pagination = ({ page, setPage, limit }) => {
   return (
-    <div>
+    <div className="page-container">
       <button
         className={page === 1 ? "hidden" : "page-btn"}
         onClick={() => {
@@ -10,7 +10,6 @@ const Pagination = ({ page, setPage, limit }) => {
       >
         previous
       </button>
-      <p>{`page ${page} / ${limit}`}</p>
       <button
         className={page === limit ? "hidden" : "page-btn"}
         onClick={() => {
@@ -19,7 +18,6 @@ const Pagination = ({ page, setPage, limit }) => {
       >
         next
       </button>
-      );
     </div>
   );
 };

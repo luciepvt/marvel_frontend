@@ -1,11 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import "../../components/Cards/CharactersAndComics.scss";
+import "../Favorites/Favorites.scss";
 
-//
 import CardComic from "../../components/Cards/CardComic";
 import Pagination from "../../components/Pagination/Pagination";
-const Comics = ({ token, favCom, setFavCom }) => {
+const Comics = ({ token, favoriteCom, setFavoriteCom }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -17,9 +18,9 @@ const Comics = ({ token, favCom, setFavCom }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comics?page=${page}&search=${search}`
+          `https://marvel-backend-lucie.herokuapp.com/comics?page=${page}&search=${search}`
         );
-        // `https://marvel-backend-lucie.herokuapp.com/comics?page=${page}&search=${search}`
+
         setData(response.data);
         setLimit(Math.ceil(response.data.count / response.data.limit));
       } catch (error) {
@@ -48,7 +49,7 @@ const Comics = ({ token, favCom, setFavCom }) => {
               }}
             />
           </div>
-          <Pagination page={page} setPage={setPage} limit={limit} />
+
           <div className="comics">
             <div className="comics-container">
               {data.results &&
@@ -57,14 +58,15 @@ const Comics = ({ token, favCom, setFavCom }) => {
                     <CardComic
                       key={comic._id}
                       comic={comic}
-                      favCom={favCom}
-                      setFavCom={setFavCom}
+                      favoriteCom={favoriteCom}
+                      setFavoriteCom={setFavoriteCom}
                       token={token}
                     />
                   );
                 })}
             </div>
           </div>
+          <Pagination page={page} setPage={setPage} limit={limit} />
         </div>
       )}
     </>

@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
-//
-import "./components/Cards/CharactersAndComics.scss";
 // components
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -28,6 +26,23 @@ const App = () => {
   const [favoriteCharacters, setFavoriteCharacters] = useState([]);
   const [favoriteComics, setFavoriteComics] = useState([]);
 
+  const setUser = (token, favoriteChar, favoriteCom) => {
+    if (token) {
+      // connexion
+      Cookies.set("token", token);
+      Cookies.set("favoriteChar", JSON.stringify(favoriteChar));
+      Cookies.set("favoriteCom", JSON.stringify(favoriteCom));
+    } else {
+      // déconnexion
+      Cookies.remove("token");
+      Cookies.remove("favChar");
+      Cookies.remove("favCom");
+    }
+    setToken(token);
+    setFavoriteCharacters(favoriteChar);
+    setFavoriteComics(favoriteCom);
+  };
+
   useEffect(() => {
     const fetchUser = () => {
       const token = Cookies.get("token");
@@ -36,29 +51,17 @@ const App = () => {
 
       if (token) {
         setToken(token);
-        setFavoriteCharacters(JSON.parse(favoriteChar));
-        setFavoriteComics(JSON.parse(favoriteCom));
+        if (typeof favoriteChar === "string") {
+          setFavoriteCharacters(JSON.parse(favoriteChar));
+        }
+        if (typeof favoriteCom === "string") {
+          setFavoriteComics(JSON.parse(favoriteCom));
+        }
       }
     };
     fetchUser();
   }, []);
 
-  const setUser = (token, favChar, favCom) => {
-    if (token) {
-      // connexion
-      Cookies.set("token", token);
-      Cookies.set("favChar", JSON.stringify(favChar));
-      Cookies.set("favCom", JSON.stringify(favCom));
-    } else {
-      // déconnexion
-      Cookies.remove("token");
-      Cookies.remove("favChar");
-      Cookies.remove("favCom");
-    }
-    setToken(token);
-    setFavoriteCharacters(favChar);
-    setFavoriteComics(favCom);
-  };
   return (
     <div>
       <Router>
@@ -69,8 +72,8 @@ const App = () => {
             element={
               <Characters
                 token={token}
-                favChar={favoriteCharacters}
-                setFavChar={setFavoriteCharacters}
+                favoriteChar={favoriteCharacters}
+                setFavoriteChar={setFavoriteCharacters}
               />
             }
           />
@@ -78,10 +81,10 @@ const App = () => {
             path="/characters/:id"
             element={
               <Character
-                favChar={favoriteCharacters}
-                setFavChar={setFavoriteCharacters}
-                favCom={favoriteComics}
-                setFavCom={setFavoriteComics}
+                favoriteChar={favoriteCharacters}
+                setFavoriteChar={setFavoriteCharacters}
+                favoriteCom={favoriteComics}
+                setFavoriteCom={setFavoriteComics}
                 token={token}
               />
             }
@@ -91,8 +94,8 @@ const App = () => {
             element={
               <Comics
                 token={token}
-                favCom={favoriteComics}
-                setFavCom={setFavoriteComics}
+                favoriteCom={favoriteComics}
+                setFavoriteCom={setFavoriteComics}
               />
             }
           />
@@ -101,10 +104,10 @@ const App = () => {
             element={
               <Favorites
                 token={token}
-                favChar={favoriteCharacters}
-                setFavChar={setFavoriteCharacters}
-                favCom={favoriteComics}
-                setFavCom={setFavoriteComics}
+                favoriteChar={favoriteCharacters}
+                setFavoriteChar={setFavoriteCharacters}
+                favoriteCom={favoriteComics}
+                setFavoriteCom={setFavoriteComics}
               />
             }
           />

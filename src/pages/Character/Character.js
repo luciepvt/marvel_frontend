@@ -4,15 +4,22 @@ import axios from "axios";
 import CardComic from "../../components/Cards/CardComic";
 import CardCharacter from "../../components/Cards/CardCharacter";
 
-const Character = ({ favChar, setFavChar, favCom, setFavCom, token }) => {
+const Character = ({
+  favoriteChar,
+  setFavoriteChar,
+  favoriteCom,
+  setFavoriteCom,
+  token,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
   const { id } = useParams();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/comics/${id}`);
-        // `https://marvel-backend-lucie.herokuapp.com/comics/${id}`
+        const response = await axios.get(
+          `https://marvel-backend-lucie.herokuapp.com/comics/${id}`
+        );
 
         setData(response.data);
         setIsLoading(false);
@@ -30,8 +37,8 @@ const Character = ({ favChar, setFavChar, favCom, setFavCom, token }) => {
         <CardCharacter
           id="character-details"
           character={data}
-          favChar={favChar}
-          setFavChar={setFavChar}
+          favoriteChar={favoriteChar}
+          setFavoriteChar={setFavoriteChar}
           token={token}
         />
       </div>
@@ -44,8 +51,8 @@ const Character = ({ favChar, setFavChar, favCom, setFavCom, token }) => {
                 <CardComic
                   key={comic._id}
                   comic={comic}
-                  favCom={favCom}
-                  setFavCom={setFavCom}
+                  favoriteCom={favoriteCom}
+                  setFavoriteCom={setFavoriteCom}
                   token={token}
                 />
               );
