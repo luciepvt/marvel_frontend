@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "/Users/user/leReacteur/react/MARVEL/marvel_frontend/src/assets/img/Marvel_Logo.svg.png";
+import logo from "../../assets/img/Marvel_Logo.svg.png";
 
 import "../Header/Header.scss";
 const Header = ({ token, setUser }) => {
